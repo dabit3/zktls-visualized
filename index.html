@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zkTLS: The Future of Verifiable Internet | Visual Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Font Faces */
+        @font-face {
+            font-family: 'Non-Natural-Grotesk';
+            src: url('./non-natural-grotesk-plain-light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Non-Natural-Grotesk';
+            src: url('./non-natural-grotesk-plain-light.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Non-Natural-Grotesk';
+            src: url('./nonnatural-groteskplainbold.otf') format('opentype');
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Non-Natural-Grotesk';
+            src: url('./nonnatural-groteskplainbold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Non-Natural-Grotesk';
+            src: url('./nonnatural-groteskplainbold.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Mondwest';
+            src: url('./mondwest.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* CSS Variables for Design System */
+        :root {
+            --bg-primary: #000000;
+            --text-primary: #FFFFFF;
+            --accent-orange: #e75a2f;
+            --accent-orange-dark: #d14d26;
+            --code-green: #00FF41;
+            --muted-text: #808080;
+            --border-gray: #333333;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Non-Natural-Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Binary Rain Background Effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        /* Data Grid Pattern - Always visible */
+        .matrix-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: gridPulse 8s ease-in-out infinite;
+        }
+
+        /* Add multiple static binary patterns */
+        .matrix-bg::after {
+            content: '1010101010\A0101010101\A1010101010\A0101010101\A1010101010\A0101010101\A1010101010\A0101010101\A1010101010\A0101010101\A1010101010\A0101010101\A1010101010\A0101010101\A1010101010\A0101010101\A1010101010\A0101010101\A1010101010\A0101010101\A1010101010\A0101010101\A1010101010\A0101010101\A1010101010';
+            position: absolute;
+            top: 50px;
+            right: 100px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: rgba(231, 90, 47, 0.15);
+            white-space: pre;
+            animation: staticBinary 20s ease-in-out infinite;
+            letter-spacing: 2px;
+            line-height: 1.5;
+        }
+
+        @keyframes staticBinary {
+            0%, 100% { opacity: 0.1; transform: translateY(0); }
+            50% { opacity: 0.2; transform: translateY(-20px); }
+        }
+
+        @keyframes gridPulse {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Binary Rain Container */
+        .binary-rain {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1.4;
+            user-select: none;
+        }
+
+        /* Binary Column Animation */
+        .binary-column {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.15);
+            animation: binaryFall linear infinite;
+            white-space: pre-line;
+            animation-delay: 0s;
+        }
+
+        .binary-column:nth-child(2n) {
+            color: rgba(231, 90, 47, 0.18);
+            animation-duration: 8s;
+        }
+
+        .binary-column:nth-child(3n) {
+            color: rgba(255, 255, 255, 0.12);
+            animation-duration: 12s;
+        }
+
+        .binary-column:nth-child(4n) {
+            animation-duration: 15s;
+        }
+
+        .binary-column:nth-child(5n) {
+            animation-duration: 10s;
+        }
+
+        @keyframes binaryFall {
+            0% {
+                transform: translateY(-200px);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(calc(100vh + 200px));
+                opacity: 0;
+            }
+        }
+
+        /* Floating Binary Particles */
+        .binary-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .binary-particle {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.12);
+            animation: floatUp linear infinite;
+            user-select: none;
+            animation-delay: 0s;
+        }
+
+        .binary-particle:nth-child(2n) {
+            color: rgba(231, 90, 47, 0.15);
+            animation-duration: 25s;
+        }
+
+        .binary-particle:nth-child(3n) {
+            color: rgba(255, 255, 255, 0.1);
+            animation-duration: 30s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(30px) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        /* Container System */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-padding {
+            padding: 6rem 0;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-item:hover {
+            color: var(--accent-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+            background: #e75a2f;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-family: 'Non-Natural-Grotesk', sans-serif;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: white;
+            margin-left: auto;
+            margin-right: auto;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            font-size: 2.5rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            font-family: 'Non-Natural-Grotesk', sans-serif;
+            background: var(--accent-orange);
+            color: var(--text-primary);
+            border: none;
+            padding: 1rem 2rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border-radius: 2px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(231, 90, 47, 0.3);
+        }
+
+        .btn-outline {
+            font-family: 'Non-Natural-Grotesk', sans-serif;
+            background: transparent;
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid white;
+            border-radius: 2px;
+        }
+
+        .btn-outline:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-number {
+            font-family: 'Mondwest', 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--accent-orange);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Non-Natural-Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--muted-text);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Card Components */
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 3px;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(231, 90, 47, 0.3);
+            border-color: var(--accent-orange);
+        }
+
+        /* Problem Section */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .fortress-card {
+            position: relative;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-gray);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 3px;
+        }
+
+        .fortress-card .icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .fortress-card h3 {
+            font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif;
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Solution Section */
+        .solution-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .web-icon {
+            background: var(--glass-bg);
+            border: 2px solid var(--border-gray);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .web2 { border-color: #4CAF50; color: #4CAF50; }
+        .web3 { border-color: var(--accent-orange); color: var(--accent-orange); }
+
+        .bridge {
+            background: linear-gradient(45deg, var(--accent-orange), #f88a68);
+            color: var(--bg-primary);
+            padding: .5rem 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            border-radius: 40px;
+            font-size: .85rem;
+
+        }
+
+        .bridge::before,
+        .bridge::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 32px;
+            height: 2px;
+            background: var(--accent-orange);
+            opacity: .3
+        }
+
+        .bridge::before { left: -32px; }
+        .bridge::after { right: -32px; }
+
+        /* How It Works Section */
+        .process-steps {
+            display: grid;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--bg-primary);
+        }
+
+        .step-content h3 {
+            font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-orange);
+        }
+
+        .step-content p {
+            color: var(--muted-text);
+            line-height: 1.8;
+        }
+
+        /* Technology Cards */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(45deg, var(--accent-orange), #f88a68);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .tech-card h3 {
+            font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-orange);
+        }
+
+        .tech-card p {
+            color: var(--muted-text);
+            line-height: 1.8;
+        }
+
+        /* Applications Grid */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .app-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .app-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-orange);
+        }
+
+        .app-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .app-card h4 {
+            font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif;
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .app-card p {
+            color: var(--muted-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--code-green);
+            margin: 2rem 0;
+            overflow-x: auto;
+            border-radius: 3px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .section-padding {
+                padding: 4rem 0;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .solution-visual {
+                flex-direction: column;
+            }
+            
+            .bridge::before,
+            .bridge::after {
+                display: none;
+            }
+            
+            .process-step {
+                grid-template-columns: 60px 1fr;
+                gap: 1.5rem;
+                text-align: left;
+            }
+            
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(45deg, var(--accent-orange), #f88a68);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+
+    <!-- Binary Rain Background -->
+    <div class="matrix-bg">
+        <div class="binary-rain"></div>
+        <div class="binary-particles"></div>
+        
+        <!-- Additional static binary elements -->
+        <div style="
+            position: absolute;
+            top: 200px;
+            left: 50px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.12);
+            white-space: pre-line;
+            animation: staticBinary 15s ease-in-out infinite;
+            animation-delay: 2s;
+        ">1100110011
+0011001100
+1100110011
+0011001100
+1100110011
+0011001100
+1100110011
+0011001100</div>
+        
+        <div style="
+            position: absolute;
+            bottom: 150px;
+            right: 200px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.1);
+            white-space: pre-line;
+            animation: staticBinary 25s ease-in-out infinite;
+            animation-delay: 5s;
+        ">10101010101010
+01010101010101
+10101010101010
+01010101010101
+10101010101010
+01010101010101</div>
+        
+        <div style="
+            position: absolute;
+            top: 400px;
+            left: 70%;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: rgba(231, 90, 47, 0.14);
+            white-space: pre-line;
+            animation: staticBinary 18s ease-in-out infinite;
+            animation-delay: 8s;
+        ">11001100
+00110011
+11001100
+00110011</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="nav-brand">zkTLS</a>
+                <ul class="nav-links">
+                    <li><a href="#problem" class="nav-item">Problem</a></li>
+                    <li><a href="#solution" class="nav-item">Solution</a></li>
+                    <li><a href="#how-it-works" class="nav-item">How It Works</a></li>
+                    <li><a href="#technologies" class="nav-item">Technologies</a></li>
+                    <li><a href="#applications" class="nav-item">Applications</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1 style="font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif;">zkTLS</h1>
+                <p class="hero-subtitle">The Future of Verifiable Internet.<br>Proving Data Without Revealing Secrets.</p>
+                <div class="hero-cta">
+                    <a href="#problem" class="btn-primary">Explore Guide</a>
+                    <a href="#how-it-works" class="btn-outline">See How It Works</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section-padding">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">[ 01 ]</div>
+                <h2 class="section-title">The Problem</h2>
+                <p class="section-description">
+                    Today's internet is a collection of isolated "fortresses" - platforms that retain user data and control access. 
+                    This creates silos that prevent secure, private data verification across platforms.
+                </p>
+            </div>
+            
+            <div class="problem-grid">
+                <div class="fortress-card fade-in">
+                    <h3>Data Silos</h3>
+                    <p>Platforms control user data, creating walled gardens that prevent interoperability and user control.</p>
+                </div>
+                <div class="fortress-card fade-in">
+                    <h3>Privacy Risks</h3>
+                    <p>Users must surrender personal data to access services, with unclear disclosure and consent practices.</p>
+                </div>
+                <div class="fortress-card fade-in">
+                    <h3>Limited Verification</h3>
+                    <p>No way to prove data authenticity to third parties without exposing sensitive information.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="section-padding">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">[ 02 ]</div>
+                <h2 class="section-title">The Solution</h2>
+                <p class="section-description">
+                    zkTLS creates a secure bridge between Web2 and Web3, enabling verifiable data transfer 
+                    while maintaining complete privacy and user control.
+                </p>
+            </div>
+            
+            <div class="solution-visual fade-in">
+                <div class="web-icon web2">WEB2</div>
+                <div class="bridge">zkTLS</div>
+                <div class="web-icon web3">WEB3</div>
+            </div>
+            
+            <div class="code-block fade-in">
+                <div>// zkTLS enables secure, private data verification</div>
+                <div>prove_data({</div>
+                <div>&nbsp;&nbsp;  source: "any_website.com",</div>
+                <div>&nbsp;&nbsp;  data: user_private_data,</div>
+                <div>&nbsp;&nbsp;  reveal: selected_fields_only,</div>
+                <div>&nbsp;&nbsp;  privacy: "zero_knowledge"</div>
+                <div>})</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section-padding">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">[ 03 ]</div>
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-description">
+                    zkTLS combines Transport Layer Security with Zero-Knowledge Proofs to enable users to prove 
+                    statements about HTTPS connections without revealing underlying secrets or sensitive data.
+                </p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>HTTPS Connection</h3>
+                        <p>User establishes a standard TLS connection with a web server, creating an encrypted channel for secure data transmission using existing web infrastructure.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Cryptographic Verification</h3>
+                        <p>The zkTLS system uses various approaches (MPC, TEE, or Proxy) to verify the TLS session and capture cryptographic evidence without compromising security.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Data Attestation</h3>
+                        <p>The system creates cryptographic attestations about the session, proving data authenticity and integrity while maintaining the confidentiality of sensitive information.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Zero-Knowledge Proof</h3>
+                        <p>Users generate zero-knowledge proofs that selectively reveal only necessary information while cryptographically proving statements about their data to any verifier.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies" class="section-padding">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">[ 04 ]</div>
+                <h2 class="section-title">Implementation Approaches</h2>
+                <p class="section-description">
+                    zkTLS implementations use different architectural approaches, each with unique trade-offs in performance, 
+                    trust assumptions, and decentralization. Here are the primary implementation models in use today.
+                </p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-card fade-in">
+                    <span class="tech-icon">🤝</span>
+                    <h3>MPC-Based zkTLS</h3>
+                    <p>Multi-party computation enables multiple parties to collaboratively perform TLS operations without any single entity holding the full session key. Provides strong decentralization guarantees but requires significant computational and networking resources.</p>
+                </div>
+                
+                <div class="tech-card fade-in">
+                    <span class="tech-icon">🔒</span>
+                    <h3>TEE-Based zkTLS</h3>
+                    <p>Trusted Execution Environments use hardware-enforced secure zones to process TLS handshakes and generate attestations. More efficient than MPC but relies on trusted hardware and manufacturer security guarantees.</p>
+                </div>
+                
+                <div class="tech-card fade-in">
+                    <span class="tech-icon">🌐</span>
+                    <h3>Proxy-Based zkTLS</h3>
+                    <p>Proxy servers act as intermediaries for HTTPS traffic, creating attestations about communication without exposing secrets. Lightweight and computationally efficient but requires trust in the proxy infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opacity Network Section -->
+    <section class="section-padding" style="background: rgba(255, 87, 34, 0.05);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">[ 05 ]</div>
+                <h2 class="section-title">Opacity Network</h2>
+                <p class="section-description">
+                    Opacity Network implements an MPC-based zkTLS solution that allows you to prove data from web servers 
+                    without exposing details you want to keep private, using distributed multi-party computation for maximum security.
+                </p>
+            </div>
+            
+            <div class="card fade-in" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h3 style="font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif; color: var(--accent-orange); margin-bottom: 1.5rem; font-size: 1.8rem;">Secure • Private • Efficient</h3>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Opacity Network's MPC-based architecture ensures no single party ever holds complete session keys or full access to your data. 
+                    Through distributed multi-party computation, you can generate cryptographic proofs of web data 
+                    while maintaining complete control over what information is revealed to third parties.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <div>
+                        <div style="font-size: 2rem; color: var(--code-green); margin-bottom: 0.5rem;">✓</div>
+                        <div style="font-weight: 600;">No Data Exposure</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; color: var(--code-green); margin-bottom: 0.5rem;">✓</div>
+                        <div style="font-weight: 600;">Cryptographic Proof</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; color: var(--code-green); margin-bottom: 0.5rem;">✓</div>
+                        <div style="font-weight: 600;">User Control</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section id="applications" class="section-padding">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">[ 06 ]</div>
+                <h2 class="section-title">Applications</h2>
+                <p class="section-description">
+                    zkTLS enables secure data verification across industries, empowering businesses 
+                    and individuals with privacy-preserving solutions.
+                </p>
+            </div>
+            
+            <div class="apps-grid">
+                <div class="app-card fade-in">
+                    <span class="app-icon">🛒</span>
+                    <h4>Commerce</h4>
+                    <p>Verify purchase histories and loyalty points without revealing personal details, improving targeting and rewards programs.</p>
+                </div>
+                
+                <div class="app-card fade-in">
+                    <span class="app-icon">📱</span>
+                    <h4>Social Media</h4>
+                    <p>Confirm ownership of social accounts, enhance marketing campaigns, and reduce sybil attacks without exposing identity.</p>
+                </div>
+                
+                <div class="app-card fade-in">
+                    <span class="app-icon">💰</span>
+                    <h4>Finance</h4>
+                    <p>Prove bank balances, credit scores, and income securely, enabling personalized services without compromising privacy.</p>
+                </div>
+                
+                <div class="app-card fade-in">
+                    <span class="app-icon">🎨</span>
+                    <h4>Digital Ownership</h4>
+                    <p>Verify ownership of digital assets like code, designs, and artwork, protecting against IP theft and fraud.</p>
+                </div>
+                
+                <div class="app-card fade-in">
+                    <span class="app-icon">🌍</span>
+                    <h4>Real-World Interactions</h4>
+                    <p>Verify event attendance, confirm locations, and authenticate reviews, bridging digital and physical worlds.</p>
+                </div>
+                
+                <div class="app-card fade-in">
+                    <span class="app-icon">🏥</span>
+                    <h4>Healthcare</h4>
+                    <p>Secure health record access and telemedicine verification while protecting sensitive patient information.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">[ 07 ]</div>
+                <h2 class="section-title">The Future</h2>
+                <p class="section-description">
+                    zkTLS is paving the way for a more open, verified internet by removing institutional gatekeepers 
+                    and giving users complete control over their data.
+                </p>
+            </div>
+            
+            <div class="card fade-in" style="max-width: 900px; margin: 0 auto; text-align: center; background: linear-gradient(135deg, rgba(231, 90, 47, 0.1), rgba(255, 255, 255, 0.1));">
+                <h3 style="font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif; color: var(--accent-orange); font-size: 2rem; margin-bottom: 2rem;">Vision for a Secure, Verified Internet</h3>
+                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem;">
+                    With zkTLS, we're building the infrastructure for a verifiable network where users maintain sovereignty over their data 
+                    while enabling secure, private interactions across the digital landscape.
+                </p>
+                <div class="code-block" style="text-align: left;">
+                    <div>// The Verifiable Internet</div>
+                    <div>const future = {</div>
+                    <div>&nbsp;&nbsp;  userControl: true,</div>
+                    <div>&nbsp;&nbsp;  dataPortability: "seamless",</div>
+                    <div>&nbsp;&nbsp;  privacy: "zero_knowledge", </div>
+                    <div>&nbsp;&nbsp;  verification: "cryptographic",</div>
+                    <div>&nbsp;&nbsp;  gatekeepers: null</div>
+                    <div>}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: 4rem 0; border-top: 1px solid var(--border-gray); margin-top: 4rem;">
+        <div class="container">
+            <div style="text-align: center;">
+                <h3 style="font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif; color: var(--accent-orange); margin-bottom: 1rem; font-size: 1.5rem;">zkTLS Visual Guide</h3>
+                <p style="color: var(--muted-text); margin-bottom: 2rem;">
+                    The Future of Verifiable Internet • Built with Privacy by Design
+                </p>
+                <div style="border-top: 1px solid var(--border-gray); padding-top: 2rem; margin-top: 2rem;">
+                    <p style="color: var(--muted-text); font-size: 0.9rem;">
+                        © 2025 zkTLS Visual Guide • Demonstrating the Power of Zero-Knowledge Proofs
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Binary Rain Animation
+        function createBinaryRain() {
+            const binaryRain = document.querySelector('.binary-rain');
+            const binaryParticles = document.querySelector('.binary-particles');
+            
+            if (!binaryRain || !binaryParticles) {
+                console.log('Binary rain elements not found');
+                return;
+            }
+            
+            console.log('Starting binary rain animation');
+            
+            // Create falling binary columns
+            function createBinaryColumn() {
+                const column = document.createElement('div');
+                column.className = 'binary-column';
+                
+                // Generate random binary string (vertical)
+                let binaryString = '';
+                const length = Math.floor(Math.random() * 20) + 15; // 15-35 characters
+                for (let i = 0; i < length; i++) {
+                    binaryString += Math.random() > 0.5 ? '1' : '0';
+                    if (i < length - 1) binaryString += '\n'; // Add line breaks for vertical text
+                }
+                column.textContent = binaryString;
+                
+                // Random horizontal position
+                column.style.left = Math.random() * 95 + '%';
+                column.style.top = '-200px';
+                
+                // Start immediately - no delay
+                column.style.animationDelay = '0s';
+                
+                binaryRain.appendChild(column);
+                
+                // Remove after animation completes
+                setTimeout(() => {
+                    if (column.parentNode) {
+                        column.parentNode.removeChild(column);
+                    }
+                }, 18000);
+            }
+            
+            // Create floating binary particles
+            function createBinaryParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'binary-particle';
+                particle.textContent = Math.random() > 0.5 ? '1' : '0';
+                
+                // Random position
+                particle.style.left = Math.random() * 95 + '%';
+                particle.style.bottom = '-50px';
+                
+                // Start immediately - no delay
+                particle.style.animationDelay = '0s';
+                
+                binaryParticles.appendChild(particle);
+                
+                // Remove after animation completes
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 35000);
+            }
+            
+            // Create initial batch immediately
+            for (let i = 0; i < 18; i++) {
+                createBinaryColumn(); // Start immediately
+            }
+            
+            for (let i = 0; i < 30; i++) {
+                createBinaryParticle(); // Start immediately
+            }
+            
+            // Continuously create new elements
+            setInterval(createBinaryColumn, 800);
+            setInterval(createBinaryParticle, 1200);
+        }
+
+        // Scroll Progress Bar
+        function updateScrollProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+        }
+
+        // Fade In Animation on Scroll
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Smooth Scrolling for Navigation Links
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing...');
+            handleScrollAnimations();
+            setupSmoothScrolling();
+            
+            // Add initial visible class to hero content
+            document.querySelector('.hero .fade-in').classList.add('visible');
+            
+            // Start binary rain immediately
+            createBinaryRain();
+        });
+
+        // Listen for scroll events
+        window.addEventListener('scroll', function() {
+            updateScrollProgress();
+            handleScrollAnimations();
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.card, .tech-card, .app-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-4px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
