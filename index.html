@@ -282,7 +282,7 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             transition: color 0.3s ease;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
         .nav-item:hover {
@@ -297,6 +297,12 @@
             justify-content: center;
             text-align: center;
             position: relative;
+        }
+
+        .hero-title {
+            @media (max-width: 800px) {
+                padding-top: 80px;
+            }
         }
 
         .hero-content h1 {
@@ -773,11 +779,11 @@
             <div class="nav-container">
                 <a href="#" class="nav-brand">zkTLS</a>
                 <ul class="nav-links">
-                    <li><a href="#problem" class="nav-item">Problem</a></li>
-                    <li><a href="#solution" class="nav-item">Solution</a></li>
+                    <li><a href="#problem" class="nav-item">Problem + Solution</a></li>
                     <li><a href="#how-it-works" class="nav-item">How It Works</a></li>
                     <li><a href="#technologies" class="nav-item">Implementations</a></li>
                     <li><a href="#applications" class="nav-item">Applications</a></li>
+                    <li><a href="#case-study" class="nav-item">Case Study</a></li>
                     <li><a href="#libraries" class="nav-item">Libraries</a></li>
                 </ul>
             </div>
@@ -788,7 +794,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content fade-in">
-                <h1 style="font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif;">zkTLS</h1>
+                <h1 class="hero-title" style="font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif;">zkTLS</h1>
                 <p class="hero-subtitle">Building a Verifiable Internet.<br>Proving Data Without Revealing Secrets.</p>
                 <div class="hero-cta">
                     <a href="#problem" class="btn-primary">Explore Guide</a>
@@ -936,6 +942,7 @@
                     <p>Proxy servers act as intermediaries for HTTPS traffic, creating attestations about communication without exposing secrets. Lightweight and computationally efficient but requires trust in the proxy infrastructure.</p>
                 </div>
             </div>
+            
         </div>
     </section>
 
@@ -994,7 +1001,7 @@
         </section>
 
     <!-- Applications Section -->
-    <section id="applications" class="section-padding">
+    <section id="case-study" class="section-padding">
         <div class="container">
             <div class="section-header fade-in">
                 <div class="section-number">[ 06 ]</div>
@@ -1142,29 +1149,54 @@
         <div class="container">
             <div class="section-header fade-in">
                 <div class="section-number">[ 08 ]</div>
-                <h2 class="section-title">The Future</h2>
+                <h2 class="section-title">Learning Resources</h2>
                 <p class="section-description">
-                    zkTLS is paving the way for a more open, verified internet by removing institutional gatekeepers 
-                    and giving users complete control over their data.
+                   Here are some concise learning resources to learn more about zkTLS.
                 </p>
             </div>
             
-            <div class="card fade-in" style="max-width: 900px; margin: 0 auto; text-align: center; background: linear-gradient(135deg, rgba(231, 90, 47, 0.1), rgba(255, 255, 255, 0.1));">
-                <h3 style="font-family: 'Mondwest', 'Non-Natural-Grotesk', sans-serif; color: var(--accent-orange); font-size: 2rem; margin-bottom: 2rem;">Vision for a Secure, Verified Internet</h3>
-                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem;">
-                    With zkTLS, we're building the infrastructure for a verifiable network where users maintain sovereignty over their data 
-                    while enabling secure, private interactions across the digital landscape.
-                </p>
-                <div class="code-block" style="text-align: left;">
-                    <div>// The Verifiable Internet</div>
-                    <div>const future = {</div>
-                    <div>&nbsp;&nbsp;  userControl: true,</div>
-                    <div>&nbsp;&nbsp;  dataPortability: "seamless",</div>
-                    <div>&nbsp;&nbsp;  privacy: "zero_knowledge", </div>
-                    <div>&nbsp;&nbsp;  verification: "cryptographic",</div>
-                    <div>&nbsp;&nbsp;  gatekeepers: null</div>
-                    <div>}</div>
-                </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.5rem;">
+                    <li style="display: flex; align-items: flex-start;">
+                        <span style="color: var(--accent-orange); font-size: 1.5rem; margin-right: 1rem; flex-shrink: 0;">▸</span>
+                        <div>
+                            <a href="https://x.com/dabit3/status/1849789118802215323/video/1" target="_blank" style="color: var(--accent-orange); text-decoration: none; font-weight: 600; font-size: 1.1rem;">zkTLS in 2 Minutes</a>
+                            <p style="color: var(--muted-text); margin-top: 0.5rem; line-height: 1.6;">Quick video overview explaining the core concepts and applications of zkTLS technology</p>
+                        </div>
+                    </li>
+                    
+                    <li style="display: flex; align-items: flex-start;">
+                        <span style="color: var(--accent-orange); font-size: 1.5rem; margin-right: 1rem; flex-shrink: 0;">▸</span>
+                        <div>
+                            <a href="https://x.com/OpacityNetwork/status/1942980972703605146" target="_blank" style="color: var(--accent-orange); text-decoration: none; font-weight: 600; font-size: 1.1rem;">Opacity at ETH Berlin</a>
+                            <p style="color: var(--muted-text); margin-top: 0.5rem; line-height: 1.6;">Presentation showcasing Opacity Network's zkTLS implementation at ETH Berlin</p>
+                        </div>
+                    </li>
+                    
+                    <li style="display: flex; align-items: flex-start;">
+                        <span style="color: var(--accent-orange); font-size: 1.5rem; margin-right: 1rem; flex-shrink: 0;">▸</span>
+                        <div>
+                            <a href="https://tlsnotary.org/" target="_blank" style="color: var(--accent-orange); text-decoration: none; font-weight: 600; font-size: 1.1rem;">TLSNotary Documentation</a>
+                            <p style="color: var(--muted-text); margin-top: 0.5rem; line-height: 1.6;">Comprehensive documentation for the open-source TLSNotary protocol and implementation guides</p>
+                        </div>
+                    </li>
+                    
+                    <li style="display: flex; align-items: flex-start;">
+                        <span style="color: var(--accent-orange); font-size: 1.5rem; margin-right: 1rem; flex-shrink: 0;">▸</span>
+                        <div>
+                            <a href="https://telah.vc/zktls" target="_blank" style="color: var(--accent-orange); text-decoration: none; font-weight: 600; font-size: 1.1rem;">Proving New Worlds with zkTLS</a>
+                            <p style="color: var(--muted-text); margin-top: 0.5rem; line-height: 1.6;">Deep dive into the transformative potential of zkTLS for creating verifiable internet applications</p>
+                        </div>
+                    </li>
+                    
+                    <li style="display: flex; align-items: flex-start;">
+                        <span style="color: var(--accent-orange); font-size: 1.5rem; margin-right: 1rem; flex-shrink: 0;">▸</span>
+                        <div>
+                            <a href="https://www.archetype.fund/media/announcing-our-lead-investment-in-opacity" target="_blank" style="color: var(--accent-orange); text-decoration: none; font-weight: 600; font-size: 1.1rem;">Archetype zkTLS Investment Thesis</a>
+                            <p style="color: var(--muted-text); margin-top: 0.5rem; line-height: 1.6;">Archetype's investment thesis on zkTLS and why they led Opacity Network's funding round</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
